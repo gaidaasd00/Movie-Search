@@ -31,7 +31,8 @@ class MovieTableViewCell: UITableViewCell {
         self.movieTitleLabel.text = model.Title
         self.movieYearLabel.text = model.Year
         let url = model.Poster
-        let data = try! Data(contentsOf: URL(string: url)!)
-        self.moviePosterImageView.image = UIImage(data: data)
+        if let data = try? Data(contentsOf: URL(string: url)!) {
+            self.moviePosterImageView.image = UIImage(data: data)
+        }
     }
 }

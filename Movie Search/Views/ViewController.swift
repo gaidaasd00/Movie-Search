@@ -4,7 +4,7 @@
 //
 //  Created by Alexey Gaidykov on 19.12.2022.
 //
-
+import SafariServices
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //register
+        //register nib
         table.register(MovieTableViewCell.nib(), forCellReuseIdentifier: MovieTableViewCell.id)
         
         table.delegate = self
@@ -84,8 +84,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        //movie details
+        let url = "https://www.imdb.com/title/\(movies[indexPath.row].imdbID)/"
+        let vc = SFSafariViewController(url: URL(string: url)!)
+        present(vc, animated: true)
     }
-    //movie details
-    
 }
 
